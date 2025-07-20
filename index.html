@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dra. Susana Apuy - Odontóloga</title>
+<style>
+/* Incluye aquí todo tu CSS que compartiste previamente */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #000;
+    background-color: #f0f8ff;
+}
+header {
+    background-color: #005f99;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+h1 {
+    margin: 0;
+    font-size: 2em;
+}
+nav {
+    margin-top: 10px;
+}
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+nav a:hover {
+    text-decoration: underline;
+    color: #ffd700;
+}
+section {
+    padding: 40px 20px;
+}
+#bienvenida {
+    background-color: #e6f2ff;
+    text-align: center;
+}
+h2 {
+    color: #005f99;
+    margin-bottom: 20px;
+}
+.servicios {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.servicio {
+    flex: 1 1 300px;
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid #005f99;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #000;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.servicio:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.servicio h3 {
+    color: #007acc;
+}
+#testimonios {
+    background-color: #cceeff;
+    padding: 40px 20px;
+    text-align: center;
+}
+.testimonio {
+    max-width: 600px;
+    margin: 20px auto;
+    font-style: italic;
+    font-size: 1.1em;
+}
+#agendar {
+    background-color: #e6f2ff;
+    padding: 40px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+#agendar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #005f99;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+input, select, textarea {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #005f99;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #004d80;
+}
+#contacto {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #cceeff;
+    border-radius: 8px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+#contacto h2 {
+    margin-bottom: 15px;
+    color: #005f99;
+}
+.whatsapp-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+}
+.whatsapp-btn:hover {
+    background-color: #1ebe5d;
+}
+footer {
+    background-color: #005f99;
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    margin-top: 40px;
+}
+@media(max-width: 768px) {
+    .servicios {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Dra. Susana Apuy - Odontóloga</h1>
+    <nav>
+        <a href="#bienvenida">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#testimonios">Testimonios</a>
+        <a href="#agendar">Agenda tu cita</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+</header>
+
+<section id="bienvenida">
+    <h2>¡Bienvenido a tu nueva sonrisa!</h2>
+    <p>En la consulta de la Dra. Susana Apuy, nos dedicamos a cuidar tu salud bucal y ofrecerte la mejor atención. Descubre nuestros servicios de limpieza dental y Alineadores invisible para mejorar tu sonrisa y tu bienestar.</p>
+</section>
+
+<section id="servicios">
+    <h2>Nuestros Servicios</h2>
+    <div class="servicios">
+        <div class="servicio">
+            <h3>Limpieza Dental</h3>
+            <p>Realizamos limpiezas profesionales para eliminar placa y sarro, prevenir caries y mantener tu boca saludable. Incluye revisión y consejos personalizados.</p>
+            <button onclick="alert('Reserva tu limpieza dental')">Más información</button>
+        </div>
+        <div class="servicio">
+            <h3>Alineadores invisibles</h3>
+            <p>Corregimos la alineación de tus dientes, una opción discreta y efectiva sin brackets metálicos. Incluye planificación personalizada y seguimiento.</p>
+            <button onclick="alert('Consulta para Invisalign')">Más información</button>
+        </div>
+    </div>
+</section>
+
+<section id="testimonios">
+    <h2>Lo que dicen nuestros pacientes</h2>
+    <div class="testimonio">
+        <p>"Gracias a la limpieza en esta consulta, mi sonrisa nunca había estado mejor. ¡Y el tratamiento de Invisalign fue increíble!" - María P.</p>
+    </div>
+    <div class="testimonio">
+        <p>"Profesionales y atentos, me sentí muy cómoda durante todo el proceso. Recomiendo totalmente." - Juan R.</p>
+    </div>
+</section>
+
+<section id="agendar">
+    <h2>Agenda tu cita</h2>
+    <form id="formCita" onsubmit="return enviarFormulario()">
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" name="nombre" required />
+
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" required />
+
+        <label for="servicio">Servicio de interés:</label>
+        <select id="servicio" name="servicio" required>
+            <option value="">Selecciona un servicio</option>
+            <option value="Limpieza Dental">Limpieza Dental</option>
+            <option value="Alineadores Invisibles">Alineadores Invisibles</option>
+        </select>
+
+        <label for="fecha">Fecha preferida:</label>
+        <input type="date" id="fecha" name="fecha" required />
+
+        <label for="mensaje">Mensaje adicional:</label>
+        <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+
+        <button type="submit">Enviar Solicitud</button>
+    </form>
+</section>
+
+<section id="contacto">
+    <h2>Contáctanos</h2>
+    <p>Para consultas rápidas, puedes contactarnos vía WhatsApp:</p>
+    <a class="whatsapp-btn" href="https://wa.me/+50683185332" target="_blank" rel="noopener noreferrer">
+        <img src="https://img.icons8.com/ios-filled/24/ffffff/whatsapp.png" style="vertical-align:middle; margin-right:8px;" />
+        Contactar por WhatsApp
+    </a>
+    <p style="margin-top:15px;">También puedes llamarnos o enviarnos un email:</p>
+    <p>Teléfono: 506 8318 5432</p>
+    <p>Email: contacto@drsusanaapuy.com</p>
+</section>
+
+<footer>
+    <p>&copy; 2025 Dra. Susana Apuy. Todos los derechos reservados.</p>
+    <p>Dirección: San José</p>
+</footer>
+
+<script>
+function enviarFormulario() {
+    alert('Gracias por tu solicitud, pronto nos pondremos en contacto contigo.');
+    document.getElementById('formCita').reset();
+    return false;
+}
+</script>
+
+</body>
+</html>
