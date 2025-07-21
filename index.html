@@ -4,162 +4,333 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Dra. Susana Apuy - Odontóloga</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
 <style>
-/* Incluye aquí todo tu CSS que compartiste previamente */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    color: #000;
-    background-color: #f0f8ff;
+    color: #333;
+    background-color: #f5f9fc;
 }
 header {
-    background-color: #005f99;
+    background: linear-gradient(135deg, #005f99, #0088cc);
     color: white;
-    padding: 20px 0;
+    padding: 25px 0;
     text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 h1 {
     margin: 0;
-    font-size: 2em;
+    font-size: 2.2em;
+    font-weight: 600;
 }
 nav {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 nav a {
     color: #ffffff;
     text-decoration: none;
     margin: 0 15px;
-    font-weight: bold;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
 }
 nav a:hover {
-    text-decoration: underline;
-    color: #ffd700;
+    background-color: rgba(255,255,255,0.2);
+    text-decoration: none;
 }
 section {
-    padding: 40px 20px;
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 #bienvenida {
-    background-color: #e6f2ff;
+    background: linear-gradient(rgba(230, 242, 255, 0.9), rgba(230, 242, 255, 0.9)), url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
     text-align: center;
+    padding: 80px 20px;
+    border-radius: 10px;
+    margin: 30px auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 h2 {
     color: #005f99;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    font-size: 2em;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+h2:after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 3px;
+    background: #ffd700;
+    bottom: -10px;
+    left: 25%;
 }
 .servicios {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 25px;
 }
 .servicio {
     flex: 1 1 300px;
-    margin: 20px;
-    padding: 20px;
-    border: 2px solid #005f99;
-    border-radius: 8px;
+    max-width: 350px;
+    margin: 0;
+    padding: 25px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
     background-color: #ffffff;
-    color: #000;
-    transition: transform 0.3s, box-shadow 0.3s;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 .servicio:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-color: #005f99;
 }
 .servicio h3 {
     color: #007acc;
+    font-size: 1.4em;
+    margin-top: 0;
+}
+.servicio-icon {
+    font-size: 2.5em;
+    color: #005f99;
+    margin-bottom: 15px;
 }
 #testimonios {
-    background-color: #cceeff;
-    padding: 40px 20px;
+    background-color: #e6f2ff;
+    padding: 60px 20px;
     text-align: center;
+    border-radius: 10px;
+    margin: 40px auto;
+}
+.testimonios-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
 }
 .testimonio {
-    max-width: 600px;
-    margin: 20px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 350px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    position: relative;
+}
+.testimonio:before {
+    content: '"';
+    font-size: 4em;
+    color: #005f99;
+    opacity: 0.2;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+}
+.testimonio p {
     font-style: italic;
     font-size: 1.1em;
+    position: relative;
+    z-index: 1;
+}
+.testimonio-author {
+    font-weight: bold;
+    margin-top: 15px;
+    color: #005f99;
+    font-style: normal;
 }
 #agendar {
-    background-color: #e6f2ff;
-    padding: 40px 20px;
+    background-color: #ffffff;
+    padding: 50px;
     max-width: 700px;
-    margin: 0 auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin: 40px auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
 }
 #agendar h2 {
     text-align: center;
-    margin-bottom: 20px;
-    color: #005f99;
+    margin-bottom: 30px;
 }
 form {
     display: flex;
     flex-direction: column;
 }
+.form-group {
+    margin-bottom: 20px;
+}
 label {
-    margin-top: 10px;
-    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #005f99;
 }
 input, select, textarea {
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1em;
+    transition: border 0.3s;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: #005f99;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,95,153,0.2);
 }
 button {
     margin-top: 20px;
     padding: 15px;
-    background-color: #005f99;
+    background: linear-gradient(135deg, #005f99, #0088cc);
     color: white;
     border: none;
     border-radius: 8px;
-    font-size: 1em;
+    font-size: 1.1em;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 button:hover {
-    background-color: #004d80;
+    background: linear-gradient(135deg, #004d80, #0077b3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+button:active {
+    transform: translateY(0);
 }
 #contacto {
     text-align: center;
-    padding: 40px 20px;
-    background-color: #cceeff;
-    border-radius: 8px;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #e6f2ff, #cceeff);
+    border-radius: 10px;
     max-width: 700px;
-    margin: 0 auto;
+    margin: 40px auto;
 }
-#contacto h2 {
-    margin-bottom: 15px;
+.contacto-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+.contacto-item {
+    flex: 1 1 200px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.contacto-icon {
+    font-size: 2em;
     color: #005f99;
+    margin-bottom: 15px;
 }
 .whatsapp-btn {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 12px 25px;
     background-color: #25D366;
     color: white;
     border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 1.1em;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 .whatsapp-btn:hover {
     background-color: #1ebe5d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.whatsapp-btn i {
+    margin-right: 10px;
+    font-size: 1.2em;
 }
 footer {
-    background-color: #005f99;
+    background: linear-gradient(135deg, #005f99, #003d66);
     color: white;
     text-align: center;
-    padding: 20px 10px;
-    margin-top: 40px;
+    padding: 30px 10px;
+    margin-top: 60px;
+}
+.social-links {
+    margin: 20px 0;
+}
+.social-links a {
+    color: white;
+    font-size: 1.5em;
+    margin: 0 10px;
+    transition: all 0.3s;
+}
+.social-links a:hover {
+    color: #ffd700;
+    transform: translateY(-3px);
+}
+.loading {
+    display: none;
+    text-align: center;
+    margin-top: 15px;
+}
+.loading i {
+    color: #005f99;
+    font-size: 1.5em;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.success-message {
+    display: none;
+    background: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+}
+.error-message {
+    display: none;
+    background: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
 }
 @media(max-width: 768px) {
-    .servicios {
-        flex-direction: column;
-        align-items: center;
+    section {
+        padding: 40px 15px;
+    }
+    #agendar {
+        padding: 30px 20px;
+    }
+    nav a {
+        display: block;
+        margin: 10px 0;
+        padding: 8px;
+    }
+    .servicio {
+        flex: 1 1 100%;
     }
 }
 </style>
@@ -169,100 +340,252 @@ footer {
 <header>
     <h1>Dra. Susana Apuy - Odontóloga</h1>
     <nav>
-        <a href="#bienvenida">Inicio</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#testimonios">Testimonios</a>
-        <a href="#agendar">Agenda tu cita</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#bienvenida"><i class="fas fa-home"></i> Inicio</a>
+        <a href="#servicios"><i class="fas fa-teeth"></i> Servicios</a>
+        <a href="#testimonios"><i class="fas fa-comments"></i> Testimonios</a>
+        <a href="#agendar"><i class="fas fa-calendar-check"></i> Agenda tu cita</a>
+        <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
     </nav>
 </header>
 
 <section id="bienvenida">
     <h2>¡Bienvenido a tu nueva sonrisa!</h2>
-    <p>En la consulta de la Dra. Susana Apuy, nos dedicamos a cuidar tu salud bucal y ofrecerte la mejor atención. Descubre nuestros servicios de limpieza dental y Alineadores invisible para mejorar tu sonrisa y tu bienestar.</p>
+    <p style="font-size: 1.2em; max-width: 800px; margin: 0 auto;">En la consulta de la Dra. Susana Apuy, nos dedicamos a cuidar tu salud bucal con atención personalizada y tecnología de vanguardia. Descubre nuestros servicios integrales para mejorar tu sonrisa y tu bienestar.</p>
 </section>
 
 <section id="servicios">
     <h2>Nuestros Servicios</h2>
     <div class="servicios">
         <div class="servicio">
-            <h3>Limpieza Dental</h3>
-            <p>Realizamos limpiezas profesionales para eliminar placa y sarro, prevenir caries y mantener tu boca saludable. Incluye revisión y consejos personalizados.</p>
-            <button onclick="alert('Reserva tu limpieza dental')">Más información</button>
+            <div class="servicio-icon">
+                <i class="fas fa-toothbrush"></i>
+            </div>
+            <h3>Limpieza Dental Profesional</h3>
+            <p>Eliminación profesional de placa y sarro para prevenir caries y enfermedades periodontales. Incluye pulido dental y asesoramiento personalizado para tu higiene bucal.</p>
+            <button onclick="scrollToForm('Limpieza Dental')">Reservar cita</button>
         </div>
         <div class="servicio">
-            <h3>Alineadores invisibles</h3>
-            <p>Corregimos la alineación de tus dientes, una opción discreta y efectiva sin brackets metálicos. Incluye planificación personalizada y seguimiento.</p>
-            <button onclick="alert('Consulta para Invisalign')">Más información</button>
+            <div class="servicio-icon">
+                <i class="fas fa-teeth-open"></i>
+            </div>
+            <h3>Alineadores Invisibles</h3>
+            <p>Tratamiento de ortodoncia invisible para corregir la posición de tus dientes sin brackets metálicos. Plan personalizado con tecnología 3D y seguimiento constante.</p>
+            <button onclick="scrollToForm('Alineadores Invisibles')">Reservar cita</button>
+        </div>
+        <div class="servicio">
+            <div class="servicio-icon">
+                <i class="fas fa-tooth"></i>
+            </div>
+            <h3>Odontología Integral</h3>
+            <p>Servicios completos que incluyen calzas, extracciones, coronas, puentes, atención pediátrica y prótesis removibles. Soluciones adaptadas a cada necesidad.</p>
+            <button onclick="scrollToForm('Valoracion Dental')">Reservar cita</button>
         </div>
     </div>
 </section>
 
 <section id="testimonios">
     <h2>Lo que dicen nuestros pacientes</h2>
-    <div class="testimonio">
-        <p>"Gracias a la limpieza en esta consulta, mi sonrisa nunca había estado mejor. ¡Y el tratamiento de Invisalign fue increíble!" - María P.</p>
-    </div>
-    <div class="testimonio">
-        <p>"Profesionales y atentos, me sentí muy cómoda durante todo el proceso. Recomiendo totalmente." - Juan R.</p>
+    <div class="testimonios-container">
+        <div class="testimonio">
+            <p>Gracias a la Dra. Apuy recuperé la confianza en mi sonrisa. El tratamiento con alineadores invisibles fue cómodo y los resultados superaron mis expectativas.</p>
+            <div class="testimonio-author">- María P.</div>
+        </div>
+        <div class="testimonio">
+            <p>Profesionalismo y calidez humana. Las limpiezas son minuciosas y sin molestias. Mi familia completa confía en sus cuidados odontológicos.</p>
+            <div class="testimonio-author">- Juan R.</div>
+        </div>
+        <div class="testimonio">
+            <p>Excelente atención pediátrica. Mis hijos ya no temen ir al dentista gracias al trato amable y el enfoque lúdico de la Dra. Susana.</p>
+            <div class="testimonio-author">- Laura M.</div>
+        </div>
     </div>
 </section>
 
 <section id="agendar">
     <h2>Agenda tu cita</h2>
-    <form id="formCita" onsubmit="return enviarFormulario()">
-        <label for="nombre">Nombre completo:</label>
-        <input type="text" id="nombre" name="nombre" required />
+    <form id="formCita">
+        <div class="form-group">
+            <label for="nombre">Nombre completo:</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Ej: Ana María Rodríguez" />
+        </div>
+        
+        <div class="form-group">
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" required placeholder="Ej: 506 8318 5432" />
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required placeholder="Ej: ejemplo@correo.com" />
+        </div>
+        
+        <div class="form-group">
+            <label for="servicio">Servicio de interés:</label>
+            <select id="servicio" name="servicio" required>
+                <option value="">Selecciona un servicio</option>
+                <option value="Limpieza Dental">Limpieza Dental</option>
+                <option value="Alineadores Invisibles">Alineadores Invisibles</option>
+                <option value="Valoracion Dental">Valoración Dental</option>
+                <option value="Calzas">Calzas</option>
+                <option value="Extracciones">Extracciones</option>
+                <option value="Coronas y puentes">Coronas y puentes</option>
+                <option value="Atencion Pediatrica">Atención Pediátrica</option>
+                <option value="Protesis Removibles">Prótesis Removibles</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha">Fecha preferida:</label>
+            <input type="date" id="fecha" name="fecha" required min="<?php echo date('Y-m-d'); ?>" />
+        </div>
+        
+        <div class="form-group">
+            <label for="hora">Hora preferida:</label>
+            <select id="hora" name="hora" required>
+                <option value="">Selecciona una hora</option>
+                <option value="08:00 - 09:00">08:00 - 09:00</option>
+                <option value="09:00 - 10:00">09:00 - 10:00</option>
+                <option value="10:00 - 11:00">10:00 - 11:00</option>
+                <option value="11:00 - 12:00">11:00 - 12:00</option>
+                <option value="13:00 - 14:00">13:00 - 14:00</option>
+                <option value="14:00 - 15:00">14:00 - 15:00</option>
+                <option value="15:00 - 16:00">15:00 - 16:00</option>
+                <option value="16:00 - 17:00">16:00 - 17:00</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="mensaje">Mensaje adicional:</label>
+            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Describe cualquier necesidad especial o inquietud..."></textarea>
+        </div>
 
-        <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" required />
-
-        <label for="servicio">Servicio de interés:</label>
-        <select id="servicio" name="servicio" required>
-            <option value="">Selecciona un servicio</option>
-            <option value="Limpieza Dental">Limpieza Dental</option>
-            <option value="Alineadores Invisibles">Alineadores Invisibles</option>
-           <option value="Valoracion Dental">Valoracion Dental</option>
-          <option value="Calzas">Calzas</option>
-          <option value="Extracciones">Extracciones</option>
-          <option value="Coronas y puentes">Coronas y puentes</option>
-          <option value="Atencion Pediatrica">Atencion Pediatrica</option>
-          <option value="Protesis Removibles">Protesis Removibles</option>
-        </select>
-
-        <label for="fecha">Fecha preferida:</label>
-        <input type="date" id="fecha" name="fecha" required />
-
-        <label for="mensaje">Mensaje adicional:</label>
-        <textarea id="mensaje" name="mensaje" rows="4"></textarea>
-
-        <button type="submit">Enviar Solicitud</button>
+        <button type="submit" id="submitBtn">
+            <i class="fas fa-paper-plane"></i> Enviar Solicitud
+        </button>
+        
+        <div class="loading" id="loading">
+            <i class="fas fa-spinner"></i> Procesando tu solicitud...
+        </div>
+        
+        <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i> ¡Gracias por tu solicitud! Nos pondremos en contacto contigo pronto para confirmar tu cita.
+        </div>
+        
+        <div class="error-message" id="errorMessage">
+            <i class="fas fa-exclamation-circle"></i> Hubo un error al enviar tu solicitud. Por favor intenta nuevamente o contáctanos directamente por WhatsApp.
+        </div>
     </form>
 </section>
 
 <section id="contacto">
     <h2>Contáctanos</h2>
-    <p>Para consultas rápidas, puedes contactarnos vía WhatsApp:</p>
+    <p style="font-size: 1.1em;">Estamos aquí para responder tus preguntas y ayudarte a programar tu visita.</p>
+    
     <a class="whatsapp-btn" href="https://wa.me/+50683185432" target="_blank" rel="noopener noreferrer">
-        <img src="https://img.icons8.com/ios-filled/24/ffffff/whatsapp.png" style="vertical-align:middle; margin-right:8px;" />
-        Contactar por WhatsApp
+        <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
     </a>
-    <p style="margin-top:15px;">También puedes llamarnos o enviarnos un email:</p>
-    <p>Teléfono: 506 8318 5432</p>
-    <p>Email: contacto@drsusanaapuy.com</p>
+    
+    <div class="contacto-info">
+        <div class="contacto-item">
+            <div class="contacto-icon">
+                <i class="fas fa-phone-alt"></i>
+            </div>
+            <h3>Teléfono</h3>
+            <p>506 8318 5432</p>
+        </div>
+        
+        <div class="contacto-item">
+            <div class="contacto-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <h3>Email</h3>
+            <p>contacto@drsusanaapuy.com</p>
+        </div>
+        
+        <div class="contacto-item">
+            <div class="contacto-icon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h3>Dirección</h3>
+            <p>San José, Costa Rica</p>
+        </div>
+    </div>
 </section>
 
 <footer>
+    <div class="social-links">
+        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/+50683185432" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+    </div>
     <p>&copy; 2025 Dra. Susana Apuy. Todos los derechos reservados.</p>
-    <p>Dirección: San José, Costa rica </p>
+    <p>Horario de atención: Lunes a Viernes de 8:00 am a 5:00 pm</p>
 </footer>
 
 <script>
-function enviarFormulario() {
-    alert('Gracias por tu solicitud, pronto nos pondremos en contacto contigo.');
-    document.getElementById('formCita').reset();
-    return false;
+// Inicializar EmailJS con tu User ID
+(function() {
+    emailjs.init("FNnW1IP2Ctrd86KHG");
+})();
+
+// Función para enviar el formulario con EmailJS
+document.getElementById('formCita').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Mostrar loading
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('successMessage').style.display = 'none';
+    document.getElementById('errorMessage').style.display = 'none';
+    
+    // Obtener los datos del formulario
+    const formData = {
+        nombre: document.getElementById('nombre').value,
+        telefono: document.getElementById('telefono').value,
+        email: document.getElementById('email').value,
+        servicio: document.getElementById('servicio').value,
+        fecha: document.getElementById('fecha').value,
+        hora: document.getElementById('hora').value,
+        mensaje: document.getElementById('mensaje').value
+    };
+    
+    // Enviar el email usando EmailJS
+    emailjs.send('service_y2xj1zg', 'template_1nr1yu5', formData)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('formCita').reset();
+            document.getElementById('submitBtn').disabled = false;
+            
+            // Desplazarse al formulario para ver el mensaje
+            document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
+        }, function(error) {
+            console.log('FAILED...', error);
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'block';
+            document.getElementById('submitBtn').disabled = false;
+            
+            // Desplazarse al formulario para ver el mensaje
+            document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
+        });
+});
+
+// Función para desplazarse al formulario con servicio seleccionado
+function scrollToForm(servicio) {
+    document.getElementById('servicio').value = servicio;
+    document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
 }
+
+// Mejorar el selector de fecha
+document.getElementById('fecha').addEventListener('focus', function() {
+    this.showPicker();
+});
+
+// Validación de teléfono
+document.getElementById('telefono').addEventListener('input', function() {
+    this.value = this.value.replace(/[^0-9+ ]/g, '');
+});
 </script>
 
 </body>
