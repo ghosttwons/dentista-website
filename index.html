@@ -586,28 +586,5 @@ document.getElementById('fecha').addEventListener('focus', function() {
 document.getElementById('telefono').addEventListener('input', function() {
     this.value = this.value.replace(/[^0-9+ ]/g, '');
 });
-</script>
-
-</body>
-</html>
 
 
-<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-    <h2 style="color: #005f99;">Nueva solicitud de cita odontológica</h2>
-    
-    <p><strong>Nombre:</strong> {{nombre}}</p>
-    <p><strong>Teléfono:</strong> {{telefono}}</p>
-    <p><strong>Email:</strong> {{email}}</p>
-    <p><strong>Servicio solicitado:</strong> {{servicio}}</p>
-    <p><strong>Fecha preferida:</strong> {{fecha}}</p>
-    <p><strong>Hora preferida:</strong> {{hora}}</p>
-    
-    <div style="margin-top: 20px; padding: 15px; background-color: #f5f9fc; border-radius: 5px;">
-        <h3 style="color: #005f99; margin-top: 0;">Mensaje del paciente:</h3>
-        <p>{{mensaje}}</p>
-    </div>
-    
-    <p style="margin-top: 30px; font-size: 0.9em; color: #666;">
-        Este mensaje fue enviado desde el formulario de contacto del sitio web de la Dra. Susana Apuy.
-    </p>
-</div>
