@@ -526,63 +526,77 @@ footer {
 // Inicializar EmailJS con tu User ID
 (function() {
     emailjs.init("FNnW1IP2Ctrd86KHG");
+    console.log("EmailJS initialized with user ID: FNnW1IP2Ctrd86KHG");
 })();
 
 // Función para enviar el formulario con EmailJS
 document.getElementById('formCita').addEventListener('submit', function(e) {
     e.preventDefault();
     
+    // Referencias a elementos
+    const loadingElement = document.getElementById('loading');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+    const form = document.getElementById('formCita');
+    
     // Mostrar loading
-    document.getElementById('loading').style.display = 'block';
-    document.getElementById('submitBtn').disabled = true;
-    document.getElementById('successMessage').style.display = 'none';
-    document.getElementById('errorMessage').style.display = 'none';
+    loadingElement.style.display = 'block';
+    submitBtn.disabled = true;
+    successMessage.style.display = 'none';
+    errorMessage.style.display = 'none';
     
     // Obtener los datos del formulario
-  // REEMPLAZA el objeto formData actual con este:
-const formData = {
-    nombre: document.getElementById('nombre').value.trim(),
-    telefono: document.getElementById('telefono').value.trim(),
-    email: document.getElementById('email').value.trim(),
-    servicio: document.getElementById('servicio').value,
-    fecha: document.getElementById('fecha').value,
-    hora: document.getElementById('hora').value,
-    mensaje: document.getElementById('mensaje').value.trim(),
-    date: new Date().toLocaleString('es-CR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    })
-};
-    // VALIDACIÓN ADICIONAL (AÑADE ESTO)
-    if (!formData.email.includes('@') || formData.telefono.length < 8 || !formData.fecha) {
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('submitBtn').disabled = false;
-        document.getElementById('errorMessage').textContent = 'Por favor complete todos los campos correctamente';
-        document.getElementById('errorMessage').style.display = 'block';
+    const formData = {
+        nombre: document.getElementById('nombre').value.trim(),
+        telefono: document.getElementById('telefono').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        servicio: document.getElementById('servicio').value,
+        fecha: document.getElementById('fecha').value,
+        hora: document.getElementById('hora').value,
+        mensaje: document.getElementById('mensaje').value.trim(),
+        date: new Date().toLocaleString('es-CR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        }),
+        to_email: 'dylanvalverde312@gmail.com' // Asegúrate que coincide con tu EmailJS template
+    };
+
+    // Validación mejorada
+    if (!formData.email.includes('@') || formData.telefono.length < 8 || !formData.fecha || !formData.servicio) {
+        loadingElement.style.display = 'none';
+        submitBtn.disabled = false;
+        errorMessage.textContent = 'Por favor complete todos los campos requeridos correctamente';
+        errorMessage.style.display = 'block';
+        document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
         return;
     }
     
-    // Enviar el email usando EmailJS
+    // Enviar el email usando EmailJS con manejo mejorado de errores
     emailjs.send('service_y2xj1zg', 'template_1nr1yu5', formData)
         .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
-            document.getElementById('formCita').reset();
-            document.getElementById('submitBtn').disabled = false;
-            
-            // Desplazarse al formulario para ver el mensaje
+            console.log('Email enviado con éxito:', response);
+            loadingElement.style.display = 'none';
+            successMessage.style.display = 'block';
+            form.reset();
+            submitBtn.disabled = false;
             document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
-        }, function(error) {
-            console.log('FAILED...', error);
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('errorMessage').style.display = 'block';
-            document.getElementById('submitBtn').disabled = false;
             
-            // Desplazarse al formulario para ver el mensaje
+            // Opcional: Enviar copia al paciente
+            emailjs.send('service_y2xj1zg', 'template_1nr1yu5', {
+                ...formData,
+                to_email: formData.email // Enviar copia al paciente
+            }).catch(err => console.log("Opcional: Error al enviar copia al paciente", err));
+        })
+        .catch(function(error) {
+            console.error('Error al enviar el email:', error);
+            loadingElement.style.display = 'none';
+            errorMessage.textContent = 'Error al enviar el formulario. Por favor intente nuevamente o contáctenos por WhatsApp.';
+            errorMessage.style.display = 'block';
+            submitBtn.disabled = false;
             document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
         });
 });
@@ -603,4 +617,15 @@ document.getElementById('telefono').addEventListener('input', function() {
     this.value = this.value.replace(/[^0-9+ ]/g, '');
 });
 
-
+// Prueba de conexión con EmailJS (puedes eliminar esto después de verificar)
+setTimeout(() => {
+    emailjs.send('service_y2xj1zg', 'template_1nr1yu5', {
+        nombre: "Prueba",
+        email: "prueba@ejemplo.com",
+        servicio: "Prueba de conexión",
+        date: new Date().toLocaleString('es-CR')
+    })
+    .then(res => console.log('Prueba de conexión exitosa', res))
+    .catch(err => console.error('Error en prueba de conexión', err));
+}, 2000);
+</script>
