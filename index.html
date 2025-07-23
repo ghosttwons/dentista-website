@@ -18,12 +18,39 @@ body {
 header {
     background: linear-gradient(135deg, #005f99, #0088cc);
     color: white;
-    padding: 25px 0;
+    padding: 15px 0;
     text-align: center;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 100;
+    max-height: 100px; /* Altura máxima */
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 10px 0;
+    }
+    
+    h1 {
+        font-size: 1.5em !important;
+        margin-bottom: 5px;
+    }
+    
+    nav {
+        margin-top: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav a {
+        margin: 0 8px 5px 8px;
+        padding: 5px 8px;
+        font-size: 0.9em;
+    }
 }
 h1 {
     margin: 0;
@@ -338,14 +365,14 @@ footer {
 <body>
 
 <header>
-    <h1>Dra. Susana Apuy - Odontóloga</h1>
-    <nav>
-        <a href="#bienvenida"><i class="fas fa-home"></i> Inicio</a>
-        <a href="#servicios"><i class="fas fa-teeth"></i> Servicios</a>
-        <a href="#testimonios"><i class="fas fa-comments"></i> Testimonios</a>
-        <a href="#agendar"><i class="fas fa-calendar-check"></i> Agenda tu cita</a>
-        <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
-    </nav>
+    <div class="header-container">
+        <h1>Dra. Susana Apuy - Odontóloga</h1>
+        <nav>
+            <a href="#bienvenida"><i class="fas fa-home"></i> <span class="nav-text">Inicio</span></a>
+            <a href="#servicios"><i class="fas fa-teeth"></i> <span class="nav-text">Servicios</span></a>
+            <!-- ... otros enlaces ... -->
+        </nav>
+    </div>
 </header>
 
 <section id="bienvenida">
