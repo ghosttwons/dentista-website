@@ -552,7 +552,7 @@ async function handleFormSubmit(e) {
     try {
         // 3. PREPARE FORM DATA (matches your template exactly)
         const templateParams = {
-            to_email: 'contacto@drsusanaapuy.com', // Your clinic's email
+            to_email: 'dylanvalverde312@gmail.com', // Your clinic's email
             reply_to: document.getElementById('email').value.trim(), // Patient's email
             nombre: document.getElementById('nombre').value.trim(),
             telefono: document.getElementById('telefono').value.trim(),
@@ -612,7 +612,7 @@ document.getElementById('telefono').addEventListener('input', function() {
 // 6. TEST FUNCTION (temporary - can remove after verification)
 function testEmailSending() {
     emailjs.send('service_y2xj1zg', 'template_1nr1yu5', {
-        to_email: 'contacto@drsusanaapuy.com',
+        to_email: 'dylanvalverde312@gmail.com',
         nombre: "TEST",
         servicio: "PRUEBA DE CONEXIÓN",
         date: new Date().toLocaleString('es-CR')
