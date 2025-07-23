@@ -523,18 +523,22 @@ footer {
 </footer>
 
 <script>
-// 1. INITIALIZE EMAILJS WITH YOUR CREDENTIALS
-emailjs.init({
-    publicKey: "FNnW1IP2Ctrd86KHG",
-    blockHeadless: true
-}).then(() => {
-    console.log("EmailJS successfully initialized!");
-}).catch(err => {
-    console.error("EmailJS initialization failed:", err);
-});
+// 1. PROPER INITIALIZATION
+let emailjsInitialized = false;
 
-// 2. FORM SUBMISSION FUNCTION
-async function handleFormSubmit(e) {
+async function initializeEmailJS() {
+    if (!emailjsInitialized) {
+        await emailjs.init({
+            publicKey: "FNnW1IP2Ctrd86KHG",
+            blockHeadless: true
+        });
+        emailjsInitialized = true;
+        console.log("EmailJS initialized successfully");
+    }
+}
+
+// 2. FORM SUBMISSION HANDLER
+document.getElementById('formCita').addEventListener('submit', async function(e) {
     e.preventDefault();
     
     // UI Elements
@@ -550,10 +554,13 @@ async function handleFormSubmit(e) {
     errorMsg.style.display = 'none';
 
     try {
-        // 3. PREPARE FORM DATA (matches your template exactly)
+        // 3. ENSURE PROPER INITIALIZATION
+        await initializeEmailJS();
+        
+        // 4. PREPARE FORM DATA (using test email)
         const templateParams = {
-            to_email: 'dylanvalverde312@gmail.com', // Your clinic's email
-            reply_to: document.getElementById('email').value.trim(), // Patient's email
+            to_email: 'dylanvalverde312@gmail.com', // TEST EMAIL
+            reply_to: document.getElementById('email').value.trim(),
             nombre: document.getElementById('nombre').value.trim(),
             telefono: document.getElementById('telefono').value.trim(),
             email: document.getElementById('email').value.trim(),
@@ -570,32 +577,29 @@ async function handleFormSubmit(e) {
             })
         };
 
-        // 4. SEND EMAIL USING YOUR SPECIFIC TEMPLATE AND SERVICE
+        // 5. SEND EMAIL
         const response = await emailjs.send(
-            'service_y2xj1zg', // Your service ID
-            'template_1nr1yu5', // Your template ID
+            'service_y2xj1zg',
+            'template_1nr1yu5',
             templateParams
         );
 
-        console.log('Email successfully sent:', response);
+        console.log('Email sent successfully:', response);
         successMsg.style.display = 'block';
         document.getElementById('formCita').reset();
         
     } catch (error) {
-        console.error('Email send failed:', error);
-        errorMsg.textContent = error.text || 'Error al enviar, por favor intente más tarde';
+        console.error('Email failed:', error);
+        errorMsg.textContent = typeof error.text === 'string' ? error.text : 'Error al enviar. Por favor intente nuevamente.';
         errorMsg.style.display = 'block';
     } finally {
         loading.style.display = 'none';
         submitBtn.disabled = false;
         document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
     }
-}
+});
 
-// 5. ATTACH EVENT LISTENER
-document.getElementById('formCita').addEventListener('submit', handleFormSubmit);
-
-// Helper functions (keep your existing ones)
+// Helper functions (unchanged)
 function scrollToForm(servicio) {
     document.getElementById('servicio').value = servicio;
     document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
@@ -609,17 +613,16 @@ document.getElementById('telefono').addEventListener('input', function() {
     this.value = this.value.replace(/[^0-9+ ]/g, '');
 });
 
-// 6. TEST FUNCTION (temporary - can remove after verification)
-function testEmailSending() {
+// Initial test (remove after verification)
+initializeEmailJS().then(() => {
+    console.log("Ready for form submissions");
+    // Optional: Auto-test first run
     emailjs.send('service_y2xj1zg', 'template_1nr1yu5', {
         to_email: 'dylanvalverde312@gmail.com',
         nombre: "TEST",
-        servicio: "PRUEBA DE CONEXIÓN",
+        servicio: "CONNECTION TEST",
         date: new Date().toLocaleString('es-CR')
-    }).then(() => {
-        alert("Prueba exitosa! Revisa tu correo.");
-    }).catch(err => {
-        alert("Error en prueba: " + err.text);
-    });
-}
+    }).then(() => console.log("Test email sent"))
+    .catch(e => console.warn("Test failed (may need template setup)", e));
+});
 </script>
