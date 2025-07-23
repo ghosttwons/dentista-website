@@ -539,15 +539,22 @@ document.getElementById('formCita').addEventListener('submit', function(e) {
     document.getElementById('errorMessage').style.display = 'none';
     
     // Obtener los datos del formulario
-    const formData = {
-        nombre: document.getElementById('nombre').value,
-        telefono: document.getElementById('telefono').value,
-        email: document.getElementById('email').value,
-        servicio: document.getElementById('servicio').value,
-        fecha: document.getElementById('fecha').value,
-        hora: document.getElementById('hora').value,
-        mensaje: document.getElementById('mensaje').value
-    };
+   // Obtener los datos del formulario + añadir fecha de envío automática
+const formData = {
+    nombre: document.getElementById('nombre').value,
+    telefono: document.getElementById('telefono').value,
+    email: document.getElementById('email').value,
+    servicio: document.getElementById('servicio').value,
+    fecha: document.getElementById('fecha').value,
+    hora: document.getElementById('hora').value,
+    mensaje: document.getElementById('mensaje').value,
+    date: new Date().toLocaleDateString('es-CR', {  // 👈 Nueva variable para {{date}}
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    })
+};
     
     // Enviar el email usando EmailJS
     emailjs.send('service_y2xj1zg', 'template_1nr1yu5', formData)
