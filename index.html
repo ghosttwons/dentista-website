@@ -523,109 +523,103 @@ footer {
 </footer>
 
 <script>
-// Inicializar EmailJS con tu User ID
-(function() {
-    emailjs.init("FNnW1IP2Ctrd86KHG");
-    console.log("EmailJS initialized with user ID: FNnW1IP2Ctrd86KHG");
-})();
-
-// Función para enviar el formulario con EmailJS
-document.getElementById('formCita').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Referencias a elementos
-    const loadingElement = document.getElementById('loading');
-    const submitBtn = document.getElementById('submitBtn');
-    const successMessage = document.getElementById('successMessage');
-    const errorMessage = document.getElementById('errorMessage');
-    const form = document.getElementById('formCita');
-    
-    // Mostrar loading
-    loadingElement.style.display = 'block';
-    submitBtn.disabled = true;
-    successMessage.style.display = 'none';
-    errorMessage.style.display = 'none';
-    
-    // Obtener los datos del formulario
-    const formData = {
-        nombre: document.getElementById('nombre').value.trim(),
-        telefono: document.getElementById('telefono').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        servicio: document.getElementById('servicio').value,
-        fecha: document.getElementById('fecha').value,
-        hora: document.getElementById('hora').value,
-        mensaje: document.getElementById('mensaje').value.trim(),
-        date: new Date().toLocaleString('es-CR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        }),
-        to_email: 'dylanvalverde312@gmail.com' // Asegúrate que coincide con tu EmailJS template
-    };
-
-    // Validación mejorada
-    if (!formData.email.includes('@') || formData.telefono.length < 8 || !formData.fecha || !formData.servicio) {
-        loadingElement.style.display = 'none';
-        submitBtn.disabled = false;
-        errorMessage.textContent = 'Por favor complete todos los campos requeridos correctamente';
-        errorMessage.style.display = 'block';
-        document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
-        return;
-    }
-    
-    // Enviar el email usando EmailJS con manejo mejorado de errores
-    emailjs.send('service_y2xj1zg', 'template_1nr1yu5', formData)
-        .then(function(response) {
-            console.log('Email enviado con éxito:', response);
-            loadingElement.style.display = 'none';
-            successMessage.style.display = 'block';
-            form.reset();
-            submitBtn.disabled = false;
-            document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
-            
-            // Opcional: Enviar copia al paciente
-            emailjs.send('service_y2xj1zg', 'template_1nr1yu5', {
-                ...formData,
-                to_email: formData.email // Enviar copia al paciente
-            }).catch(err => console.log("Opcional: Error al enviar copia al paciente", err));
-        })
-        .catch(function(error) {
-            console.error('Error al enviar el email:', error);
-            loadingElement.style.display = 'none';
-            errorMessage.textContent = 'Error al enviar el formulario. Por favor intente nuevamente o contáctenos por WhatsApp.';
-            errorMessage.style.display = 'block';
-            submitBtn.disabled = false;
-            document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
-        });
+// 1. INITIALIZE EMAILJS WITH YOUR CREDENTIALS
+emailjs.init({
+    publicKey: "FNnW1IP2Ctrd86KHG",
+    blockHeadless: true
+}).then(() => {
+    console.log("EmailJS successfully initialized!");
+}).catch(err => {
+    console.error("EmailJS initialization failed:", err);
 });
 
-// Función para desplazarse al formulario con servicio seleccionado
+// 2. FORM SUBMISSION FUNCTION
+async function handleFormSubmit(e) {
+    e.preventDefault();
+    
+    // UI Elements
+    const loading = document.getElementById('loading');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('successMessage');
+    const errorMsg = document.getElementById('errorMessage');
+    
+    // Show loading state
+    loading.style.display = 'block';
+    submitBtn.disabled = true;
+    successMsg.style.display = 'none';
+    errorMsg.style.display = 'none';
+
+    try {
+        // 3. PREPARE FORM DATA (matches your template exactly)
+        const templateParams = {
+            to_email: 'contacto@drsusanaapuy.com', // Your clinic's email
+            reply_to: document.getElementById('email').value.trim(), // Patient's email
+            nombre: document.getElementById('nombre').value.trim(),
+            telefono: document.getElementById('telefono').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            servicio: document.getElementById('servicio').value,
+            fecha: document.getElementById('fecha').value,
+            hora: document.getElementById('hora').value,
+            mensaje: document.getElementById('mensaje').value.trim(),
+            date: new Date().toLocaleString('es-CR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })
+        };
+
+        // 4. SEND EMAIL USING YOUR SPECIFIC TEMPLATE AND SERVICE
+        const response = await emailjs.send(
+            'service_y2xj1zg', // Your service ID
+            'template_1nr1yu5', // Your template ID
+            templateParams
+        );
+
+        console.log('Email successfully sent:', response);
+        successMsg.style.display = 'block';
+        document.getElementById('formCita').reset();
+        
+    } catch (error) {
+        console.error('Email send failed:', error);
+        errorMsg.textContent = error.text || 'Error al enviar, por favor intente más tarde';
+        errorMsg.style.display = 'block';
+    } finally {
+        loading.style.display = 'none';
+        submitBtn.disabled = false;
+        document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// 5. ATTACH EVENT LISTENER
+document.getElementById('formCita').addEventListener('submit', handleFormSubmit);
+
+// Helper functions (keep your existing ones)
 function scrollToForm(servicio) {
     document.getElementById('servicio').value = servicio;
     document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Mejorar el selector de fecha
 document.getElementById('fecha').addEventListener('focus', function() {
     this.showPicker();
 });
 
-// Validación de teléfono
 document.getElementById('telefono').addEventListener('input', function() {
     this.value = this.value.replace(/[^0-9+ ]/g, '');
 });
 
-// Prueba de conexión con EmailJS (puedes eliminar esto después de verificar)
-setTimeout(() => {
+// 6. TEST FUNCTION (temporary - can remove after verification)
+function testEmailSending() {
     emailjs.send('service_y2xj1zg', 'template_1nr1yu5', {
-        nombre: "Prueba",
-        email: "prueba@ejemplo.com",
-        servicio: "Prueba de conexión",
+        to_email: 'contacto@drsusanaapuy.com',
+        nombre: "TEST",
+        servicio: "PRUEBA DE CONEXIÓN",
         date: new Date().toLocaleString('es-CR')
-    })
-    .then(res => console.log('Prueba de conexión exitosa', res))
-    .catch(err => console.error('Error en prueba de conexión', err));
-}, 2000);
+    }).then(() => {
+        alert("Prueba exitosa! Revisa tu correo.");
+    }).catch(err => {
+        alert("Error en prueba: " + err.text);
+    });
+}
 </script>
