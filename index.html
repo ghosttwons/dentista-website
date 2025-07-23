@@ -540,6 +540,7 @@ document.getElementById('formCita').addEventListener('submit', function(e) {
     
     // Obtener los datos del formulario
    // Obtener los datos del formulario + añadir fecha de envío automática
+// Obtener los datos del formulario
 const formData = {
     nombre: document.getElementById('nombre').value,
     telefono: document.getElementById('telefono').value,
@@ -547,13 +548,7 @@ const formData = {
     servicio: document.getElementById('servicio').value,
     fecha: document.getElementById('fecha').value,
     hora: document.getElementById('hora').value,
-    mensaje: document.getElementById('mensaje').value,
-    date: new Date().toLocaleDateString('es-CR', {  // 👈 Nueva variable para {{date}}
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    })
+    mensaje: document.getElementById('mensaje').value
 };
     
     // Enviar el email usando EmailJS
