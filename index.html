@@ -1,65 +1,129 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Nueva solicitud de cita odontológica</title>
-</head>
-<body style="margin:0; padding:0; font-family: Arial, sans-serif; color:#333; line-height:1.6;">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f5f5f5">
-        <tr>
-            <td align="center" valign="top" style="padding:20px 0;">
-                <table width="600" border="0" cellspacing="0" cellpadding="30" bgcolor="#ffffff" style="border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.05);">
-                    <tr>
-                        <td style="border-bottom:2px solid #005f99;">
-                            <h1 style="color:#005f99; margin:0 0 20px 0; font-size:24px;">Dra. Susana Apuy - Nueva solicitud de cita</h1>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h2 style="color:#005f99; margin-top:0; font-size:20px;">Datos del paciente:</h2>
-                            
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td width="30%" style="padding:8px 0; font-weight:bold;">Nombre:</td>
-                                    <td width="70%" style="padding:8px 0;">{{nombre}}</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding:8px 0; font-weight:bold;">Teléfono:</td>
-                                    <td style="padding:8px 0;">{{telefono}}</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding:8px 0; font-weight:bold;">Email:</td>
-                                    <td style="padding:8px 0;">{{email}}</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding:8px 0; font-weight:bold;">Servicio:</td>
-                                    <td style="padding:8px 0;">{{servicio}}</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding:8px 0; font-weight:bold;">Fecha:</td>
-                                    <td style="padding:8px 0;">{{fecha}}</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding:8px 0; font-weight:bold;">Hora:</td>
-                                    <td style="padding:8px 0;">{{hora}}</td>
-                                </tr>
-                            </table>
-                            
-                            <div style="margin-top:25px; padding:15px; background-color:#f5f9fc; border-radius:5px;">
-                                <h3 style="color:#005f99; margin-top:0; font-size:16px;">Mensaje del paciente:</h3>
-                                <p style="margin:10px 0 0 0;">{{mensaje}}</p>
-                            </div>
-                            
-                            <p style="margin-top:30px; font-size:12px; color:#666; border-top:1px solid #eee; padding-top:15px;">
-                                Este mensaje fue generado automáticamente desde el sitio web de la Dra. Susana Apuy.<br/>
-                                Fecha de envío: {{date}}
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+<!DOCTYPE html>
+<html lang="es">
+<!-- [Previous head section remains exactly the same] -->
+<body>
+<!-- [All previous sections remain the same until the form] -->
+
+<section id="agendar">
+    <h2>Agenda tu cita</h2>
+    <form id="formCita">
+        <div class="form-group">
+            <label for="nombre">Nombre completo:</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Ej: Ana María Rodríguez" />
+        </div>
+        
+        <div class="form-group">
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" required placeholder="Ej: 506 8318 5432" />
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required placeholder="Ej: ejemplo@correo.com" />
+        </div>
+        
+        <div class="form-group">
+            <label for="servicio">Servicio de interés:</label>
+            <select id="servicio" name="servicio" required>
+                <option value="">Selecciona un servicio</option>
+                <option value="Limpieza Dental">Limpieza Dental</option>
+                <option value="Alineadores Invisibles">Alineadores Invisibles</option>
+                <option value="Valoracion Dental">Valoración Dental</option>
+                <option value="Calzas">Calzas</option>
+                <option value="Extracciones">Extracciones</option>
+                <option value="Coronas y puentes">Coronas y puentes</option>
+                <option value="Atencion Pediatrica">Atención Pediátrica</option>
+                <option value="Protesis Removibles">Prótesis Removibles</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha">Fecha preferida:</label>
+            <input type="date" id="fecha" name="fecha" required min="<?php echo date('Y-m-d'); ?>" />
+        </div>
+        
+        <div class="form-group">
+            <label for="hora">Hora preferida:</label>
+            <select id="hora" name="hora" required>
+                <option value="">Selecciona una hora</option>
+                <option value="08:00 - 09:00">08:00 - 09:00</option>
+                <option value="09:00 - 10:00">09:00 - 10:00</option>
+                <option value="10:00 - 11:00">10:00 - 11:00</option>
+                <option value="11:00 - 12:00">11:00 - 12:00</option>
+                <option value="13:00 - 14:00">13:00 - 14:00</option>
+                <option value="14:00 - 15:00">14:00 - 15:00</option>
+                <option value="15:00 - 16:00">15:00 - 16:00</option>
+                <option value="16:00 - 17:00">16:00 - 17:00</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="mensaje">Mensaje adicional:</label>
+            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Describe cualquier necesidad especial o inquietud..."></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn">
+            <i class="fas fa-paper-plane"></i> Enviar Solicitud
+        </button>
+        
+        <div class="loading" id="loading">
+            <i class="fas fa-spinner"></i> Procesando tu solicitud...
+        </div>
+        
+        <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i> ¡Gracias por tu solicitud! Nos pondremos en contacto contigo pronto para confirmar tu cita.
+        </div>
+        
+        <div class="error-message" id="errorMessage">
+            <i class="fas fa-exclamation-circle"></i> Hubo un error al enviar tu solicitud. Por favor intenta nuevamente o contáctanos directamente por WhatsApp.
+        </div>
+    </form>
+</section>
+
+<!-- [Rest of your HTML remains the same] -->
+
+<script>
+// EmailJS initialization and form submission
+(function() {
+    emailjs.init("FNnW1IP2Ctrd86KHG");
+})();
+
+document.getElementById('formCita').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('successMessage').style.display = 'none';
+    document.getElementById('errorMessage').style.display = 'none';
+    
+    const formData = {
+        nombre: document.getElementById('nombre').value,
+        telefono: document.getElementById('telefono').value,
+        email: document.getElementById('email').value,
+        servicio: document.getElementById('servicio').value,
+        fecha: document.getElementById('fecha').value,
+        hora: document.getElementById('hora').value,
+        mensaje: document.getElementById('mensaje').value
+    };
+    
+    emailjs.send('service_y2xj1zg', 'template_1nr1yu5', formData)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('formCita').reset();
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
+        }, function(error) {
+            console.log('FAILED...', error);
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'block';
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
+        });
+});
+
+// [Rest of your JavaScript remains the same]
+</script>
 </body>
 </html>
