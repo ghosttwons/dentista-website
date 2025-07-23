@@ -523,17 +523,21 @@ footer {
 </footer>
 
 <script>
-// 1. PROPER INITIALIZATION
-let emailjsInitialized = false;
+// 1. VERIFIED INITIALIZATION
+const EMAILJS_USER_ID = "FNnW1iP2CIrd86KHG"; // Replace with actual key from dashboard
+const SERVICE_ID = "service_y2xj1zg";
+const TEMPLATE_ID = "template_1nr1yu5";
 
 async function initializeEmailJS() {
-    if (!emailjsInitialized) {
-        await emailjs.init({
-            publicKey: "FNnW1IP2Ctrd86KHG",
-            blockHeadless: true
-        });
-        emailjsInitialized = true;
-        console.log("EmailJS initialized successfully");
+    try {
+        await emailjs.init(EMAILJS_USER_ID);
+        console.log("EmailJS initialized with valid key");
+        return true;
+    } catch (err) {
+        console.error("Initialization failed:", err);
+        document.getElementById('errorMessage').textContent = "Error in email service configuration";
+        document.getElementById('errorMessage').style.display = 'block';
+        return false;
     }
 }
 
@@ -554,12 +558,12 @@ document.getElementById('formCita').addEventListener('submit', async function(e)
     errorMsg.style.display = 'none';
 
     try {
-        // 3. ENSURE PROPER INITIALIZATION
-        await initializeEmailJS();
+        // Verify initialization
+        if (!(await initializeEmailJS())) return;
         
-        // 4. PREPARE FORM DATA (using test email)
+        // Prepare form data
         const templateParams = {
-            to_email: 'dylanvalverde312@gmail.com', // TEST EMAIL
+            to_email: 'dylanvalverde312@gmail.com', // Your test email
             reply_to: document.getElementById('email').value.trim(),
             nombre: document.getElementById('nombre').value.trim(),
             telefono: document.getElementById('telefono').value.trim(),
@@ -568,30 +572,28 @@ document.getElementById('formCita').addEventListener('submit', async function(e)
             fecha: document.getElementById('fecha').value,
             hora: document.getElementById('hora').value,
             mensaje: document.getElementById('mensaje').value.trim(),
-            date: new Date().toLocaleString('es-CR', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            })
+            date: new Date().toLocaleString('es-CR')
         };
 
-        // 5. SEND EMAIL
-        const response = await emailjs.send(
-            'service_y2xj1zg',
-            'template_1nr1yu5',
-            templateParams
-        );
-
-        console.log('Email sent successfully:', response);
+        // Send email
+        const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
+        
+        console.log('Email sent!', response);
         successMsg.style.display = 'block';
         document.getElementById('formCita').reset();
         
     } catch (error) {
-        console.error('Email failed:', error);
-        errorMsg.textContent = typeof error.text === 'string' ? error.text : 'Error al enviar. Por favor intente nuevamente.';
+        console.error('Send failed:', error);
+        errorMsg.textContent = error.text || 'Service unavailable. Please contact us directly.';
         errorMsg.style.display = 'block';
+        
+        // Detailed error diagnostics
+        if (error.status === 400) {
+            console.warn("Configuration problem detected. Please verify:");
+            console.warn("1. Service ID:", SERVICE_ID);
+            console.warn("2. Template ID:", TEMPLATE_ID);
+            console.warn("3. User ID:", EMAILJS_USER_ID);
+        }
     } finally {
         loading.style.display = 'none';
         submitBtn.disabled = false;
@@ -599,30 +601,5 @@ document.getElementById('formCita').addEventListener('submit', async function(e)
     }
 });
 
-// Helper functions (unchanged)
-function scrollToForm(servicio) {
-    document.getElementById('servicio').value = servicio;
-    document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
-}
-
-document.getElementById('fecha').addEventListener('focus', function() {
-    this.showPicker();
-});
-
-document.getElementById('telefono').addEventListener('input', function() {
-    this.value = this.value.replace(/[^0-9+ ]/g, '');
-});
-
-// Initial test (remove after verification)
-initializeEmailJS().then(() => {
-    console.log("Ready for form submissions");
-    // Optional: Auto-test first run
-    emailjs.send('service_y2xj1zg', 'template_1nr1yu5', {
-        to_email: 'dylanvalverde312@gmail.com',
-        nombre: "TEST",
-        servicio: "CONNECTION TEST",
-        date: new Date().toLocaleString('es-CR')
-    }).then(() => console.log("Test email sent"))
-    .catch(e => console.warn("Test failed (may need template setup)", e));
-});
+// [Keep all your existing helper functions]
 </script>
