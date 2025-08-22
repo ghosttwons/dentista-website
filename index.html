@@ -654,7 +654,20 @@ document.getElementById('formCita').addEventListener('submit', async function(e)
 });
 
 // [Keep all existing helper functions]
+
+function scrollToForm(servicio) {
+    // Bajar al formulario
+    document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
+
+    // Seleccionar el servicio correspondiente en el <select>
+    const servicioSelect = document.getElementById('servicio');
+    if (servicioSelect) {
+        servicioSelect.value = servicio;
+    }
+}
+
 </script>
+
 
 
 
